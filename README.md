@@ -22,6 +22,7 @@ Spark writes to S3 prefix, partitioned by location_name (country) and also to Ka
 
 ## Kafka 
 Spark DF writes to Kafka to 'kafka-df_spark_ss' topic. 
+
 The kafka consumer writes to DynamoDB in Key-Value format, including hash key composites of location_code', 'language_code', 'main_keyword',
 'secondary_keyword', 'year', 'month' fields from the Dataframe.
 
