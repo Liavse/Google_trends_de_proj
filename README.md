@@ -19,17 +19,22 @@ f'sudo -u ubuntu /usr/bin/python3 /tmp/pycharm_project_155/main.py --file_name {
 The script operation you can see on AWS Systems Manager -> Documents -> AWS-RunShellScript -> Run commands.**
 The python script runs Spark DataFrame that reads the specific file from S3 prefix.
 Spark writes to S3 prefix, partitioned by location_name (country) and also to Kafka topic (kafka-df_spark_ss).
-Kafka consumer writes to DynamoDB.
+
+## Kafka 
+Spark DF writes to Kafka to 'kafka-df_spark_ss' topic. 
+The kafka consumer writes to DynamoDB in Key-Value format, including hash key composites of location_code', 'language_code', 'main_keyword',
+'secondary_keyword', 'year', 'month' fields from the Dataframe.
 
 ## Data Analysis
 All spark DF transformed files are stored in S3 and there is Athena above S3.
 External Table partitioned by location_name for free hand sql analysis.
 
 ## Logs
-For evert step there is a log written to Aws OpenSearch with Kibana dashboard into logs_py index.
-The logs written by logger class that stores the log into OpenSearch (Aws elasticsearch)
-Eeach log has timestamp, level (Info/Warning/Error) and the message with the formatter:
-logging.Formatter(' %(name)s- [%(levelname)s] - %(filename)s - %(message)s - %(asctime)s ').
+For every step there is a log written to Aws OpenSearch with Kibana dashboard into logs_py index.
+The logs written by logger class created by us, that stores the log into OpenSearch (Aws elasticsearch)
+Eeach log contain timestamp, level (Info/Warning/Error) and the message with the formatter:
+Formatter(' %(name)s- [%(levelname)s] - %(filename)s - %(message)s - %(asctime)s ').
+Here is a taste of the kibana logs dashboard:
 
 ![](https://github.com/Liavse/Google_trends_de_proj/blob/main/logs_py_kibana.png)
 
