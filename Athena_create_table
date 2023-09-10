@@ -1,0 +1,27 @@
+CREATE EXTERNAL TABLE `searchresult_v2`(
+  `location_code` int, 
+  `language_code` string, 
+  `main_keyword` string, 
+  `secondary_keyword` string, 
+  `related_keywords` string, 
+  `year` int, 
+  `month` int, 
+  `search_volume` int, 
+  `file_name` string, 
+  `country_iso_code` string, 
+  `location_type` string, 
+  `language_name` string, 
+  `keywords` int, 
+  `serps` int, 
+  `ck` string, 
+  `hashed_key` int)
+PARTITIONED BY ( 
+  `location_name` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+LOCATION
+  's3://marketing-analysis-project/transformed_pqs'
