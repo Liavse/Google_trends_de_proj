@@ -26,7 +26,7 @@ All spark DF transformed files are stored in S3 and there is Athena above S3.
 External Table partitioned by location_name for free hand sql analysis.
 
 ## Logs
-For evert step there is a log written to Aws OpenSearch with Kibana dashboard.
+For evert step there is a log written to Aws OpenSearch with Kibana dashboard into logs_py index.
 The logs written by logger class that stores the log into OpenSearch (Aws elasticsearch)
 Eeach log has timestamp, level (Info/Warning/Error) and the message with the formatter:
 logging.Formatter(' %(name)s- [%(levelname)s] - %(filename)s - %(message)s - %(asctime)s ').
