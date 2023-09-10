@@ -18,8 +18,10 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 from pyspark import SparkConf
 from def_Mysql_conn import create_df_mysql
 from Spark_Process.def_copy_delete_s3 import files_names_for_move
-from common.config_class import Config
-from common.logger import setup_logger
+import sys
+sys.path.append('/tmp/pycharm_project_155/common') #this script will recognize common folder
+from config_class import Config
+from logger import setup_logger
 
 def main_spark(file_name):
     config = Config()
