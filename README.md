@@ -4,7 +4,7 @@ In this project we use AWS echosystem with python following this architecure
 ![](https://github.com/Liavse/Google_trends_de_proj/blob/main/GoogleTrends_Aws_Architecture.png)
 
 ## API - getting search words
-The first part is extract Json data from the API. 
+The first part is extract Json data from the API.
 The api gets paramters such as: wanted keyword, language and country to search for and gives back
 wide range of data such as different similar keywords (related_keywords), amont of searches per year per month for each keyword, search_engine type, etc...
 The function asks the user for keyword, language and country. If the user already searched the same keyword, language and country in the same month, he will get a message that he had already searched it the there is a data for him. 
