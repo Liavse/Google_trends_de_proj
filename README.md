@@ -17,8 +17,8 @@ The scripts get arguments with the file name from s3.
 f'sudo -u ubuntu /usr/bin/python3 /tmp/pycharm_project_155/main.py --file_name {key}'
 **When the lambda invokes you can see the logs in CloudWatch under Logs Group in "s3_spark_trigger".
 The script operation you can see on AWS Systems Manager -> Documents -> AWS-RunShellScript -> Run commands.**
-The python script runs Spark DataFrame that reads the specific file from S3 prefix.
-Spark writes to S3 prefix, partitioned by location_name (country) and also to Kafka topic (kafka-df_spark_ss).
+The python script runs Spark DataFrame that reads the specific Json file from S3 prefix.
+Spark writes to S3 prefix as a parquet, partitioned by location_name (country) and also to Kafka topic (kafka-df_spark_ss).
 
 ## Kafka 
 Spark DF writes to Kafka to 'kafka-df_spark_ss' topic. 
@@ -29,6 +29,7 @@ The kafka consumer writes to DynamoDB in Key-Value format, including hash key co
 ## Data Analysis
 All spark DF transformed files are stored in S3 and there is Athena above S3.
 External Table partitioned by location_name for free hand sql analysis.
+In addition, there is a warehouse on Redshift which triggered by every single parquet file proccessed by spark
 
 ## Logs
 For every step there is a log written to Aws OpenSearch with Kibana dashboard into logs_py index.
