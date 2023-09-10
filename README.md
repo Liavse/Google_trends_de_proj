@@ -31,6 +31,7 @@ The logs written by logger class that stores the log into OpenSearch (Aws elasti
 Eeach log has timestamp, level (Info/Warning/Error) and the message with the formatter:
 logging.Formatter(' %(name)s- [%(levelname)s] - %(filename)s - %(message)s - %(asctime)s ').
 
+![](https://github.com/Liavse/Google_trends_de_proj/blob/main/logs_py_kibana.png)
 
 
 
