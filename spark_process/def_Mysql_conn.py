@@ -1,8 +1,8 @@
 import mysql.connector
 import pandas as pd
-import re
-
-from common.config_class import Config
+import sys
+sys.path.append('/tmp/pycharm_project_155/common')
+from config_class import Config
 
 # config = configparser.ConfigParser()
 # config.read('config.ini')
