@@ -1,0 +1,28 @@
+import json
+import boto3
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+def lambda_handler(event, context):
+    s3 = boto3.client('s3')
+    ssm_client = boto3.client('ssm')
+    
+    # for record in event['Records']:
+        
+    logger.info("event Records: " + json.dumps(event['Records'], indent=4))
+    
+    # sqs_message = json.loads(event['Records'][0]['body'])
+    key = event['Records'][0]['s3']['object']['key'].split('/')[-1]
+
+    logger.info("The processed file is  " + key)
+
+    instance_id = "i-01d875d90c71d16d4"
+    command = f'sudo -u ubuntu /usr/bin/python3 /tmp/pycharm_project_155/Spark_Process/main.py --file_name {key}'
+    
+    response = ssm_client.send_command(
+        InstanceIds=[instance_id],
+        DocumentName="AWS-RunShellScript",
+        Parameters={'commands': [command]}
+    )
